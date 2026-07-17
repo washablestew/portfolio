@@ -82,8 +82,8 @@ export function GreenfieldPage() {
         </motion.section>
 
         <motion.section className="greenfield-videos" variants={reveal} {...revealProps}>
-          <ProjectVideo src={videos.goldenCeylon} poster={desktopGrid[0]} ariaLabel="Golden Ceylon" />
           <ProjectVideo src={videos.gingerLemon} poster={desktopGrid[1]} ariaLabel="Ginger Lemon" />
+          <ProjectVideo src={videos.currantMint} poster={desktopGrid[2]} ariaLabel="Currant Mint" />
         </motion.section>
 
         <motion.section className="case-role greenfield-role" variants={reveal} {...revealProps}>
@@ -113,7 +113,7 @@ export function GreenfieldPage() {
 
         <motion.footer className="case-finale greenfield-finale" variants={reveal} {...revealProps}>
           <h2>GREENFIELD</h2>
-          <ProjectVideo src={videos.currantMint} poster={heroMainDesktop} ariaLabel="Currant Mint" />
+          <ProjectVideo src={videos.goldenCeylon} poster={heroMainDesktop} ariaLabel="Golden Ceylon" />
         </motion.footer>
       </main>
     </MotionConfig>
