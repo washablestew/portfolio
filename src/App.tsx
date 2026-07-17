@@ -1,5 +1,8 @@
 import { motion, MotionConfig, type Variants } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import { projects, type Project } from './projects'
+
+const MotionLink = motion.create(Link)
 
 const revealVariants: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -44,9 +47,9 @@ function ArrowIcon() {
 
 function ProjectRow({ project }: { project: Project }) {
   return (
-    <motion.a
+    <MotionLink
       className="project"
-      href={`#${project.id}`}
+      to={project.href}
       id={project.id}
       aria-label={`${project.title}, ${project.category}, ${project.period}`}
       variants={projectVariants}
@@ -65,11 +68,11 @@ function ProjectRow({ project }: { project: Project }) {
         <b>{project.period}</b>
       </span>
       <motion.span className="project-arrow" variants={arrowVariants}><ArrowIcon /></motion.span>
-    </motion.a>
+    </MotionLink>
   )
 }
 
-export function App() {
+export function HomePage() {
   return (
     <MotionConfig reducedMotion="user">
       <main>

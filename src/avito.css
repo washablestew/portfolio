@@ -1,0 +1,194 @@
+.case-page {
+  --case-gutter: max(40px, calc((100vw - 1720px) / 2));
+  color: var(--ink);
+  background: var(--paper);
+  font-family: Roboto, Arial, sans-serif;
+  overflow: clip;
+}
+
+.case-page picture { display: block; overflow: hidden; }
+.case-page picture img { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+.case-hero {
+  position: relative;
+  width: min(1720px, calc(100vw - 80px));
+  height: 851px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 131px 414px 306px;
+  column-gap: 20px;
+}
+
+.case-hero h1 {
+  position: absolute;
+  z-index: 2;
+  top: -10px;
+  left: calc(50% + 10px);
+  margin: 0;
+  font-size: clamp(64px, 4.7vw, 90px);
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.case-hero-main { grid-column: 1 / 3; grid-row: 1 / 4; border-radius: 44px; }
+.case-hero-secondary { grid-column: 3; grid-row: 2; border-radius: 44px; }
+.case-hero-icon { grid-column: 4; grid-row: 2; align-self: end; width: 125px; height: 125px; border-radius: 22px; }
+.case-hero-copy { grid-column: 3; grid-row: 3; padding-top: 20px; }
+.case-hero-copy a { color: inherit; opacity: .5; font-size: 16px; text-transform: uppercase; }
+.case-hero-copy p { margin: 36px 0 0; max-width: 415px; font-size: 24px; line-height: 1.18; }
+
+.case-meta {
+  width: min(1720px, calc(100vw - 80px));
+  margin: 100px auto 0;
+  display: grid;
+  grid-template-columns: 1fr 1.35fr 1.65fr;
+  gap: 145px;
+  align-items: start;
+}
+
+.case-meta p { margin: 0; }
+.case-meta-identity > p { opacity: .5; font-size: 16px; line-height: 1.2; }
+.case-meta-identity picture { width: 125px; height: 125px; margin-top: 39px; border-radius: 22px; }
+.case-label { margin-bottom: 39px !important; font-size: 16px; letter-spacing: .3em; text-transform: uppercase; }
+.case-meta-value { font-size: 36px; line-height: 1.16; }
+
+.case-grid {
+  width: min(1720px, calc(100vw - 80px));
+  margin: 100px auto 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 20px;
+}
+.case-grid picture { aspect-ratio: 1; border-radius: 44px; }
+
+.case-role {
+  width: min(1720px, calc(100vw - 80px));
+  margin: 20px auto 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 165px;
+  align-items: start;
+}
+.case-role-copy { padding-top: 40px; }
+.case-kicker { margin: 0 0 40px; font-size: 16px; letter-spacing: .3em; text-transform: uppercase; text-align: center; }
+.case-body { font-size: 24px; line-height: 1.18; }
+.case-body p { margin: 0 0 1em; }
+.case-role > picture { aspect-ratio: 850 / 643; border-radius: 44px; }
+.case-role > picture img { mix-blend-mode: multiply; }
+
+.case-result { width: 100%; }
+.case-result-pin {
+  width: min(1720px, calc(100vw - 80px));
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(420px, .82fr) 1fr;
+  gap: 165px;
+  align-items: start;
+}
+.case-result.is-sticky .case-result-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  align-items: center;
+}
+.case-result-copy { max-width: 705px; }
+.case-result-viewport { min-width: 0; overflow: hidden; }
+.case-result-track { display: flex; gap: 40px; width: max-content; }
+.case-result-track picture { width: min(44.2vw, 850px); aspect-ratio: 1; flex: none; border-radius: 44px; }
+
+.case-finale { margin-top: 100px; }
+.case-finale h2 {
+  width: min(1720px, calc(100vw - 80px));
+  margin: 0 auto 20px;
+  font-family: var(--display);
+  font-size: clamp(110px, 11.5vw, 220px);
+  font-weight: 400;
+  line-height: 1.06;
+  white-space: nowrap;
+}
+.case-finale picture { width: 100%; height: 678px; }
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .case-hero h1 { font-size: 58px; }
+  .case-meta { gap: 60px; }
+  .case-role, .case-result-pin { gap: 70px; }
+  .case-meta-value { font-size: 30px; }
+  .case-body { font-size: 20px; }
+}
+
+@media (max-width: 900px) {
+  .case-page { --case-gutter: 16px; }
+  .case-hero {
+    width: calc(100vw - 32px);
+    height: auto;
+    display: grid;
+    grid-template-columns: 1fr 80px;
+    grid-template-rows: auto;
+    column-gap: 13px;
+  }
+  .case-hero h1 {
+    position: static;
+    grid-column: 1 / -1;
+    margin: 18px 0 8px;
+    font-size: 36px;
+    line-height: 1.17;
+    text-align: center;
+    white-space: normal;
+  }
+  .case-hero-main { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 358 / 359; border-radius: 28px; }
+  .case-hero-secondary { grid-column: 1; grid-row: auto; width: 265px; aspect-ratio: 1; margin-top: 16px; border-radius: 28px; }
+  .case-hero-icon { grid-column: 2; grid-row: 3; width: 80px; height: 80px; align-self: end; border-radius: 16px; }
+  .case-hero-copy { grid-column: 1 / -1; grid-row: auto; padding-top: 13px; }
+  .case-hero-copy a { font-size: 16px; }
+  .case-hero-copy p { margin-top: 18px; max-width: none; font-size: 16px; line-height: 1.18; }
+
+  .case-meta {
+    width: calc(100vw - 32px);
+    margin-top: 61px;
+    display: block;
+  }
+  .case-meta > div + div { margin-top: 32px; }
+  .case-meta-identity picture { margin-top: 20px; }
+  .case-label { margin-bottom: 39px !important; }
+  .case-meta-value { font-size: 36px; }
+  .case-meta > div:last-child .case-label { margin-bottom: 24px !important; }
+  .case-meta > div:last-child .case-meta-value { font-size: 24px; }
+
+  .case-grid {
+    width: calc(100vw - 32px);
+    margin-top: 64px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .case-grid picture { border-radius: 24px; }
+
+  .case-role {
+    width: calc(100vw - 32px);
+    margin: 32px auto 64px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .case-role-copy { padding-top: 0; }
+  .case-kicker { margin-bottom: 16px; }
+  .case-body { font-size: 24px; line-height: 1.18; }
+  .case-role > picture { width: 100%; aspect-ratio: 361 / 273; border-radius: 28px; }
+
+  .case-result { width: calc(100vw - 32px); margin: 0 auto; height: auto !important; }
+  .case-result-pin { width: 100%; display: block; }
+  .case-result-copy { max-width: none; }
+  .case-result-viewport { overflow: visible; }
+  .case-result-track { display: grid; width: 100%; gap: 16px; margin-top: 32px; transform: none !important; }
+  .case-result-track picture { width: 100%; aspect-ratio: 1; border-radius: 28px; }
+
+  .case-finale { margin-top: 64px; padding-bottom: 24px; }
+  .case-finale h2 {
+    width: calc(100vw - 38px);
+    margin-bottom: 0;
+    font-size: 48px;
+    line-height: 1.02;
+    white-space: nowrap;
+  }
+  .case-finale picture { width: calc(100vw - 32px); height: auto; aspect-ratio: 358 / 126; margin: 0 auto; border-radius: 28px; }
+}
