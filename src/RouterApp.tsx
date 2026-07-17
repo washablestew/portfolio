@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { HomePage } from './App'
 import { AvitoPage } from './pages/AvitoPage'
 import { GreenfieldPage } from './pages/GreenfieldPage'
+import { JaecooPage } from './pages/JaecooPage'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -22,6 +23,7 @@ export function PortfolioApp() {
         <Route path="/" element={<HomePage />} />
         <Route path="/projects/avito" element={<AvitoPage />} />
         <Route path="/projects/greenfield" element={<GreenfieldPage />} />
+        <Route path="/projects/jaecoo" element={<JaecooPage />} />
       </Routes>
     </BrowserRouter>
   )

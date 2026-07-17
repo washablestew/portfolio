@@ -1,0 +1,36 @@
+.jaecoo-page .case-hero-icon,
+.jaecoo-page .case-meta-identity picture { mix-blend-mode: multiply; }
+
+.jaecoo-grid { grid-auto-flow: row; }
+.jaecoo-grid picture { aspect-ratio: 415 / 519; }
+.jaecoo-grid .project-video {
+  grid-column: 3 / 5;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+}
+
+.jaecoo-role { margin-top: 100px; }
+.jaecoo-role > picture { aspect-ratio: 850 / 930; }
+.jaecoo-finale h2 { text-align: center; }
+
+@media (max-width: 900px) {
+  .jaecoo-grid { grid-auto-flow: row; }
+  .jaecoo-grid picture { aspect-ratio: 171 / 214; }
+  .jaecoo-grid picture:nth-of-type(1) { order: 4; }
+  .jaecoo-grid picture:nth-of-type(2) { order: 5; }
+  .jaecoo-grid picture:nth-of-type(3) { order: 3; }
+  .jaecoo-grid picture:nth-of-type(4) { order: 6; }
+  .jaecoo-grid picture:nth-of-type(5) { order: 1; }
+  .jaecoo-grid picture:nth-of-type(6) { order: 2; }
+  .jaecoo-grid .project-video { grid-column: 1 / -1; order: 7; }
+
+  .jaecoo-role { margin-top: 64px; }
+  .jaecoo-role > picture {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    aspect-ratio: 390 / 427;
+    border-radius: 0;
+  }
+
+  .jaecoo-finale h2 { font-size: 42px; letter-spacing: -.06em; text-align: center; }
+}
