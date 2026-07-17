@@ -3,13 +3,19 @@ type ResponsiveImageProps = {
   mobile: string
   alt: string
   className?: string
+  priority?: boolean
 }
 
-export function ResponsiveImage({ desktop, mobile, alt, className }: ResponsiveImageProps) {
+export function ResponsiveImage({ desktop, mobile, alt, className, priority = false }: ResponsiveImageProps) {
   return (
     <picture className={['case-media', className].filter(Boolean).join(' ')}>
       <source media="(max-width: 900px)" srcSet={mobile} />
-      <img src={desktop} alt={alt} loading="lazy" />
+      <img
+        src={desktop}
+        alt={alt}
+        loading={priority ? 'eager' : 'lazy'}
+        fetchPriority={priority ? 'high' : 'auto'}
+      />
     </picture>
   )
 }

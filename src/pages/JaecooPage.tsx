@@ -31,10 +31,10 @@ function collectAssets(modules: Record<string, string>) {
 }
 
 const desktopGrid = collectAssets(
-  import.meta.glob('../assets/jaecoo/desktop/grid-*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>,
+  import.meta.glob('../assets/jaecoo/desktop/grid-*.*', { eager: true, query: '?url', import: 'default' }) as Record<string, string>,
 )
 const mobileGrid = collectAssets(
-  import.meta.glob('../assets/jaecoo/mobile/grid-*.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>,
+  import.meta.glob('../assets/jaecoo/mobile/grid-*.*', { eager: true, query: '?url', import: 'default' }) as Record<string, string>,
 )
 
 const reveal: Variants = {
@@ -54,7 +54,7 @@ export function JaecooPage() {
       <main className="case-page jaecoo-page">
         <section className="case-hero">
           <h1>Jaecoo</h1>
-          <ResponsiveImage desktop={heroMainDesktop} mobile={heroMainMobile} alt="Автомобиль Jaecoo" className="case-hero-main" />
+          <ResponsiveImage desktop={heroMainDesktop} mobile={heroMainMobile} alt="Автомобиль Jaecoo" className="case-hero-main" priority />
           <ResponsiveImage desktop={heroSecondaryDesktop} mobile={heroSecondaryMobile} alt="Публикация Jaecoo" className="case-hero-secondary" />
           <ResponsiveImage desktop={iconDesktop} mobile={iconMobile} alt="Логотип Jaecoo" className="case-hero-icon" />
           <div className="case-hero-copy">
