@@ -1,0 +1,92 @@
+.chillout-page .case-hero {
+  height: auto;
+  grid-template-rows: 131px auto auto;
+}
+
+.chillout-page .case-hero h1 { font-size: clamp(52px, 4.3vw, 82px); }
+.chillout-page .case-hero-main { aspect-ratio: 850 / 1062; }
+.chillout-page .case-hero-secondary { aspect-ratio: 415 / 518; }
+.chillout-page .case-hero-icon,
+.chillout-page .case-meta-identity picture { mix-blend-mode: multiply; }
+.chillout-page .case-hero-copy p { margin: 0; }
+
+.chillout-grid {
+  grid-template-rows: auto auto;
+}
+
+.chillout-grid .project-video {
+  grid-column: 1;
+  grid-row: 1 / 3;
+  height: 100%;
+  aspect-ratio: 302 / 536;
+}
+
+.chillout-grid picture { aspect-ratio: 415 / 518; }
+.chillout-grid picture:nth-of-type(1) { grid-column: 2; grid-row: 1; }
+.chillout-grid picture:nth-of-type(2) { grid-column: 3; grid-row: 1; }
+.chillout-grid picture:nth-of-type(3) { grid-column: 4; grid-row: 1; }
+.chillout-grid picture:nth-of-type(4) {
+  grid-column: 2 / 5;
+  grid-row: 2;
+  aspect-ratio: 1285 / 200;
+}
+
+.chillout-role { margin-top: 100px; }
+.chillout-role > picture { aspect-ratio: 850 / 1061; }
+.chillout-finale h2 { text-align: center; }
+.chillout-finale picture {
+  height: auto;
+  aspect-ratio: 1920 / 946;
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .chillout-page .case-hero h1 { font-size: 52px; }
+}
+
+@media (max-width: 900px) {
+  .chillout-page .case-hero {
+    height: auto;
+    grid-template-rows: auto;
+  }
+
+  .chillout-page .case-hero h1 { font-size: 36px; }
+  .chillout-page .case-hero-main { aspect-ratio: 850 / 1062; }
+  .chillout-page .case-hero-secondary { aspect-ratio: 415 / 518; }
+  .chillout-page .case-hero-copy { padding-top: 16px; }
+
+  .chillout-grid {
+    grid-template-rows: auto;
+  }
+
+  .chillout-grid picture { aspect-ratio: 171 / 214; }
+  .chillout-grid picture:nth-of-type(1) { grid-column: 1; grid-row: 1; }
+  .chillout-grid picture:nth-of-type(2) { grid-column: 2; grid-row: 1; }
+  .chillout-grid picture:nth-of-type(3) { grid-column: 1; grid-row: 2; }
+  .chillout-grid picture:nth-of-type(4) {
+    grid-column: 2;
+    grid-row: 2;
+    aspect-ratio: 171 / 214;
+  }
+  .chillout-grid .project-video {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    height: auto;
+    aspect-ratio: 302 / 536;
+  }
+
+  .chillout-role { margin-top: 64px; }
+  .chillout-role > picture {
+    width: calc(100% + 32px);
+    margin-left: -16px;
+    aspect-ratio: 850 / 1061;
+    border-radius: 0;
+  }
+
+  .chillout-finale h2 {
+    width: calc(100vw - 32px);
+    font-size: 56px;
+    letter-spacing: -.06em;
+    text-align: center;
+  }
+  .chillout-finale picture { aspect-ratio: 1920 / 946; }
+}
