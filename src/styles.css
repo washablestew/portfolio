@@ -1,6 +1,10 @@
 @font-face {
   font-family: 'Davai';
-  src: local('Davai Ebash Font'), local('Davai_Ebash_Font');
+  src:
+    url('./assets/fonts/davai-ebash.woff2') format('woff2'),
+    url('./assets/fonts/davai-ebash.otf') format('opentype');
+  font-style: normal;
+  font-weight: 400;
   font-display: swap;
 }
 
