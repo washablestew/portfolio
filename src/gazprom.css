@@ -1,6 +1,10 @@
+.gazprom-page .case-hero {
+  grid-template-rows: 170px 414px 267px;
+}
+
 .gazprom-page .case-hero h1 {
-  font-size: clamp(64px, 4.7vw, 90px);
-  line-height: 1.04;
+  font-size: clamp(60px, 4vw, 76px);
+  line-height: 1.02;
   white-space: normal;
 }
 
@@ -63,11 +67,13 @@
 }
 
 @media (max-width: 1200px) and (min-width: 901px) {
+  .gazprom-page .case-hero { grid-template-rows: 125px 414px 312px; }
   .gazprom-page .case-hero h1 { font-size: 52px; }
   .gazprom-finale h2 { font-size: 5.6vw; }
 }
 
 @media (max-width: 900px) {
+  .gazprom-page .case-hero { grid-template-rows: auto; }
   .gazprom-page .case-hero h1 {
     font-size: 36px;
     line-height: 1.04;

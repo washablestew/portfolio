@@ -39,12 +39,14 @@ export function ChillOutPage() {
     <MotionConfig reducedMotion="user">
       <main className="case-page chillout-page">
         <section className="case-hero">
-          <h1>Напитки ChillOut</h1>
           <ResponsiveImage desktop={heroMain} mobile={heroMain} alt="Коктейль Велосипед с тоником ChillOut" className="case-hero-main" priority />
-          <ResponsiveImage desktop={heroSecondary} mobile={heroSecondary} alt="Коктейль Шпионский ром с тоником ChillOut" className="case-hero-secondary" />
-          <ResponsiveImage desktop={logo} mobile={logo} alt="Логотип ChillOut" className="case-hero-icon" />
-          <div className="case-hero-copy">
-            <p>ChillOut — молодой бренд тоников и кол от Черноголовки, запущенный в 2022 году и ориентированный на яркое, современное позиционирование в категории безалкогольных напитков.</p>
+          <div className="chillout-hero-side">
+            <h1>Напитки ChillOut</h1>
+            <ResponsiveImage desktop={heroSecondary} mobile={heroSecondary} alt="Коктейль Шпионский ром с тоником ChillOut" className="case-hero-secondary" />
+            <ResponsiveImage desktop={logo} mobile={logo} alt="Логотип ChillOut" className="case-hero-icon" />
+            <div className="case-hero-copy">
+              <p>ChillOut — молодой бренд тоников и кол от Черноголовки, запущенный в 2022 году и ориентированный на яркое, современное позиционирование в категории безалкогольных напитков.</p>
+            </div>
           </div>
         </section>
 

@@ -1,11 +1,44 @@
 .chillout-page .case-hero {
   height: auto;
-  grid-template-rows: 131px auto auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: auto;
+  gap: 20px;
 }
 
-.chillout-page .case-hero h1 { font-size: clamp(52px, 4.3vw, 82px); }
-.chillout-page .case-hero-main { aspect-ratio: 850 / 1062; }
-.chillout-page .case-hero-secondary { aspect-ratio: 415 / 518; }
+.chillout-page .case-hero-main {
+  grid-column: 1;
+  grid-row: 1;
+  aspect-ratio: 850 / 1062;
+}
+.chillout-hero-side {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: 131px auto auto;
+  column-gap: 20px;
+  align-content: start;
+}
+.chillout-page .case-hero h1 {
+  position: static;
+  grid-column: 1 / -1;
+  grid-row: 1;
+  font-size: clamp(52px, 4.3vw, 82px);
+}
+.chillout-page .case-hero-secondary {
+  grid-column: 1;
+  grid-row: 2;
+  aspect-ratio: 415 / 518;
+}
+.chillout-page .case-hero-icon {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+}
+.chillout-page .case-hero-copy {
+  grid-column: 1;
+  grid-row: 3;
+  padding-top: 20px;
+}
 .chillout-page .case-hero-icon,
 .chillout-page .case-meta-identity picture { mix-blend-mode: multiply; }
 .chillout-page .case-hero-copy p { margin: 0; }
@@ -46,13 +79,32 @@
 @media (max-width: 900px) {
   .chillout-page .case-hero {
     height: auto;
+    grid-template-columns: 1fr 80px;
     grid-template-rows: auto;
+    gap: 0 13px;
   }
 
+  .chillout-hero-side { display: contents; }
   .chillout-page .case-hero h1 { font-size: 36px; }
-  .chillout-page .case-hero-main { aspect-ratio: 850 / 1062; }
-  .chillout-page .case-hero-secondary { aspect-ratio: 415 / 518; }
-  .chillout-page .case-hero-copy { padding-top: 16px; }
+  .chillout-page .case-hero-main {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    aspect-ratio: 850 / 1062;
+  }
+  .chillout-page .case-hero-secondary {
+    grid-column: 1;
+    grid-row: auto;
+    aspect-ratio: 415 / 518;
+  }
+  .chillout-page .case-hero-icon {
+    grid-column: 2;
+    grid-row: 3;
+  }
+  .chillout-page .case-hero-copy {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    padding-top: 16px;
+  }
 
   .chillout-grid {
     grid-template-rows: auto;
