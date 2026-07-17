@@ -17,6 +17,9 @@ import iconMobile from '../assets/greenfield/mobile/icon.png'
 import roleMobile from '../assets/greenfield/mobile/role.png'
 import result01Mobile from '../assets/greenfield/mobile/result-01.png'
 import result02Mobile from '../assets/greenfield/mobile/result-02.png'
+import goldenCeylonVideo from '../assets/greenfield/videos/greenfield-golden-ceylon.mp4'
+import gingerLemonVideo from '../assets/greenfield/videos/greenfield-ginger-lemon.mp4'
+import currantMintVideo from '../assets/greenfield/videos/greenfield-currant-mint.mp4'
 
 const desktopGrid = Object.values(
   import.meta.glob('../assets/greenfield/desktop/grid-*.png', { eager: true, query: '?url', import: 'default' }),
@@ -26,9 +29,9 @@ const mobileGrid = Object.values(
 ) as string[]
 
 const videos = {
-  goldenCeylon: '',
-  gingerLemon: '',
-  currantMint: '',
+  goldenCeylon: goldenCeylonVideo,
+  gingerLemon: gingerLemonVideo,
+  currantMint: currantMintVideo,
 }
 
 const reveal: Variants = {
