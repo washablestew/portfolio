@@ -1,5 +1,37 @@
-import { useEffect } from 'react'
+import { motion, MotionConfig, type Variants } from 'framer-motion'
 import { projects, type Project } from './projects'
+
+const revealVariants: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
+  },
+}
+
+const projectVariants: Variants = {
+  ...revealVariants,
+  hover: {
+    x: 14,
+    transition: { type: 'spring', stiffness: 220, damping: 24, mass: 0.8 },
+  },
+}
+
+const arrowVariants: Variants = {
+  hidden: { rotate: 0 },
+  visible: { rotate: 0 },
+  hover: {
+    rotate: 45,
+    transition: { type: 'spring', stiffness: 240, damping: 20 },
+  },
+}
+
+const revealProps = {
+  initial: 'hidden',
+  whileInView: 'visible',
+  viewport: { once: true, amount: 0.12 },
+} as const
 
 function ArrowIcon() {
   return (
@@ -12,7 +44,16 @@ function ArrowIcon() {
 
 function ProjectRow({ project }: { project: Project }) {
   return (
-    <a className="project reveal" href={`#${project.id}`} id={project.id} aria-label={`${project.title}, ${project.category}, ${project.period}`}>
+    <motion.a
+      className="project"
+      href={`#${project.id}`}
+      id={project.id}
+      aria-label={`${project.title}, ${project.category}, ${project.period}`}
+      variants={projectVariants}
+      {...revealProps}
+      whileHover="hover"
+      whileFocus="hover"
+    >
       <h2>{project.title}</h2>
       <span className="project-dot" aria-hidden="true" />
       <span className="project-meta">
@@ -23,45 +64,32 @@ function ProjectRow({ project }: { project: Project }) {
         <small>Дата проекта</small>
         <b>{project.period}</b>
       </span>
-      <span className="project-arrow"><ArrowIcon /></span>
-    </a>
+      <motion.span className="project-arrow" variants={arrowVariants}><ArrowIcon /></motion.span>
+    </motion.a>
   )
 }
 
 export function App() {
-  useEffect(() => {
-    const elements = document.querySelectorAll<HTMLElement>('.reveal')
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      elements.forEach((element) => element.classList.add('is-visible'))
-      return
-    }
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')),
-      { threshold: 0.12 },
-    )
-    elements.forEach((element) => observer.observe(element))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <main>
+    <MotionConfig reducedMotion="user">
+      <main>
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-orbit hero-orbit-left" />
         <div className="hero-orbit hero-orbit-right" />
         <p className="name">Дима Чумак</p>
-        <div className="title-stack reveal">
+        <motion.div className="title-stack" variants={revealVariants} {...revealProps}>
           <i /><i /><i />
           <h1 id="hero-title">ПОРТФОЛИО</h1>
-        </div>
-        <p className="intro reveal">Привет! Я — графический дизайнер с направленностью на универсальный подход.</p>
+        </motion.div>
+        <motion.p className="intro" variants={revealVariants} {...revealProps}>Привет! Я — графический дизайнер с направленностью на универсальный подход.</motion.p>
       </section>
 
       <section className="projects" aria-label="Проекты">
         {projects.map((project) => <ProjectRow project={project} key={project.id} />)}
-        <p className="upcoming reveal">new projects upcoming...</p>
+        <motion.p className="upcoming" variants={revealVariants} {...revealProps}>new projects upcoming...</motion.p>
       </section>
 
-      <footer className="contact reveal">
+      <motion.footer className="contact" variants={revealVariants} {...revealProps}>
         <div className="contact-heading">
           <h2>Давайте<br />работать вместе!</h2>
           <svg className="scribble" viewBox="0 0 220 270" aria-hidden="true">
@@ -73,7 +101,8 @@ export function App() {
           <a href="https://t.me/DmitryPawlovich" target="_blank" rel="noreferrer">telegram: @DmitryPawlovich</a>
         </address>
         <div className="footer-line"><span>2026</span><a href="#instagram" id="instagram">INST</a></div>
-      </footer>
-    </main>
+      </motion.footer>
+      </main>
+    </MotionConfig>
   )
 }
