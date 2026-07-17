@@ -11,5 +11,5 @@ export const projects: Project[] = [
   { id: 'greenfield', title: 'Greenfield', category: 'AI-ролики', period: '2025', href: '/projects/greenfield' },
   { id: 'jaecoo', title: 'Jaecoo', category: 'SMM', period: '2022–2024', href: '/projects/jaecoo' },
   { id: 'chillout', title: 'ChillOut', category: 'SMM', period: '2023–2024', href: '/projects/chillout' },
-  { id: 'gazprom', title: 'Газпром', category: 'Аудиобиблиотека', period: '2023', href: '#gazprom' },
+  { id: 'gazprom', title: 'Газпром', category: 'Аудиобиблиотека', period: '2022', href: '/projects/gazprom' },
 ]

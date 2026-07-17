@@ -1,0 +1,95 @@
+.gazprom-page .case-hero h1 {
+  font-size: clamp(64px, 4.7vw, 90px);
+  line-height: 1.04;
+  white-space: normal;
+}
+
+.gazprom-page .case-hero-main,
+.gazprom-page .case-hero-secondary { aspect-ratio: 1; }
+
+.gazprom-page .case-hero-copy p { margin-top: 0; }
+
+.gazprom-page .case-hero-copy a,
+.gazprom-link {
+  color: #ff8562;
+  text-decoration-line: underline;
+  text-decoration-color: #000;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .12em;
+}
+
+.gazprom-page .case-hero-copy a {
+  font-size: inherit;
+  text-transform: none;
+  opacity: 1;
+}
+
+.gazprom-page .case-hero-copy a:focus-visible,
+.gazprom-link:focus-visible {
+  outline: 3px solid #ff8562;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+.gazprom-page .case-hero-icon,
+.gazprom-page .case-meta-identity picture { background: #0c2b46; }
+
+.gazprom-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.gazprom-role { margin-top: 100px; }
+.gazprom-role > picture { aspect-ratio: 1; }
+.gazprom-role > picture img { mix-blend-mode: normal; }
+
+.gazprom-finale {
+  position: relative;
+  padding-top: 80px;
+  overflow: hidden;
+}
+
+.gazprom-finale h2 {
+  width: min(1720px, calc(100vw - 80px));
+  margin-bottom: 0;
+  font-size: clamp(54px, 5.8vw, 112px);
+  letter-spacing: -.055em;
+  line-height: .92;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.gazprom-finale > img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-top: 24px;
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  .gazprom-page .case-hero h1 { font-size: 52px; }
+  .gazprom-finale h2 { font-size: 5.6vw; }
+}
+
+@media (max-width: 900px) {
+  .gazprom-page .case-hero h1 {
+    font-size: 36px;
+    line-height: 1.04;
+  }
+
+  .gazprom-page .case-hero-copy { padding-top: 16px; }
+  .gazprom-page .case-hero-copy p { margin: 0; }
+  .gazprom-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .gazprom-role { margin-top: 64px; }
+
+  .gazprom-finale { padding-top: 32px; }
+  .gazprom-finale h2 {
+    width: calc(100vw - 32px);
+    font-size: clamp(30px, 9.3vw, 56px);
+    line-height: .95;
+    white-space: normal;
+  }
+  .gazprom-finale > img {
+    width: 140%;
+    max-width: none;
+    margin-top: 16px;
+    margin-left: -20%;
+  }
+}
