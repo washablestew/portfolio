@@ -79,7 +79,12 @@ main { min-height: 100vh; overflow: hidden; }
   border-bottom: 3px solid var(--ink);
   text-decoration: none;
 }
-.project + .project { margin-top: 45px; }
+@media (min-width: 901px) {
+  .project + .project {
+    height: 148px;
+    padding-top: 45px;
+  }
+}
 .project h2 { margin: 0; font-family: var(--display); font-size: 36px; font-weight: 400; line-height: 1.2; }
 .project-dot { width: 11px; height: 11px; margin-top: 22px; border-radius: 50%; background: var(--ink); }
 .project-meta { display: grid; gap: 11px; font-size: 14px; line-height: 1.3; }
