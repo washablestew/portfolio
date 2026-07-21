@@ -1,7 +1,8 @@
 import { AnimatePresence, motion, MotionConfig, useMotionValue, useReducedMotion, useSpring, type Variants } from 'framer-motion'
-import { memo, useCallback, useState, type FocusEvent, type PointerEvent } from 'react'
+import { memo, useCallback, useEffect, useRef, useState, type FocusEvent, type PointerEvent } from 'react'
 import { Link } from 'react-router-dom'
 import smileUrl from './assets/smile.svg'
+import { HeroTypeOrbit } from './components/HeroTypeOrbit'
 import { ProjectPreviewDeck, type ActivePreview } from './components/ProjectPreviewDeck'
 import { projectPreviews } from './projectPreviews'
 import { projects, type Project } from './projects'
@@ -91,6 +92,8 @@ const ProjectRow = memo(function ProjectRow({ project, onPreviewStart, onPreview
 export function HomePage() {
   const reduceMotion = useReducedMotion()
   const [activePreview, setActivePreview] = useState<ActivePreview | null>(null)
+  const [mobileOrbitsEscaped, setMobileOrbitsEscaped] = useState(false)
+  const orbitReturnTimer = useRef<number | null>(null)
   const previewX = useMotionValue(-400)
   const previewY = useMotionValue(-400)
   const springX = useSpring(previewX, { stiffness: 320, damping: 34, mass: 0.72 })
@@ -148,12 +151,23 @@ export function HomePage() {
 
   const endPreview = useCallback(() => setActivePreview(null), [])
 
+  const escapeMobileOrbits = useCallback(() => {
+    if (!window.matchMedia('(max-width: 900px)').matches) return
+    setMobileOrbitsEscaped(true)
+    if (orbitReturnTimer.current !== null) window.clearTimeout(orbitReturnTimer.current)
+    orbitReturnTimer.current = window.setTimeout(() => setMobileOrbitsEscaped(false), 900)
+  }, [])
+
+  useEffect(() => () => {
+    if (orbitReturnTimer.current !== null) window.clearTimeout(orbitReturnTimer.current)
+  }, [])
+
   return (
     <MotionConfig reducedMotion="user">
       <main>
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-orbit hero-orbit-left" />
-        <div className="hero-orbit hero-orbit-right" />
+        <HeroTypeOrbit side="left" mobileEscaped={mobileOrbitsEscaped} onMobileEscape={escapeMobileOrbits} />
+        <HeroTypeOrbit side="right" mobileEscaped={mobileOrbitsEscaped} onMobileEscape={escapeMobileOrbits} />
         <p className="name">Дима Чумак</p>
         <motion.div className="title-stack" variants={revealVariants} {...revealProps}>
           <i /><i /><i />
