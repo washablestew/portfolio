@@ -12,5 +12,4 @@ export const projects: Project[] = [
   { id: 'jaecoo', title: 'Jaecoo', category: 'SMM', period: '2022–2024', href: '/projects/jaecoo' },
   { id: 'chillout', title: 'ChillOut', category: 'SMM', period: '2023–2024', href: '/projects/chillout' },
   { id: 'gazprom', title: 'Газпром', category: 'Аудиобиблиотека', period: '2022', href: '/projects/gazprom' },
-  { id: 'durak', title: 'Игра «Дурак»', category: 'Карточная игра', period: '2025', href: '#durak' },
 ]
