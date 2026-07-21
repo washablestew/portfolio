@@ -34,6 +34,8 @@ main { min-height: 100vh; overflow: hidden; }
   z-index: 4;
   width: max-content;
   margin: 0 auto;
+  padding: 3px 10px 4px;
+  background: var(--paper);
   font-size: 32px;
 }
 
@@ -171,10 +173,10 @@ main { min-height: 100vh; overflow: hidden; }
   .project-back-link { top: 16px; left: 16px; width: 46px; height: 46px; }
   .project-back-link + main { padding-top: 64px; }
   .hero { height: 310px; padding-top: 24px; }
-  .name { margin-left: 16px; padding: 2px 7px 3px 0; background: var(--paper); font-size: 16px; }
+  .name { margin-left: 16px; padding: 2px 7px 3px 0; font-size: 16px; }
   .hero-type-orbit { overflow: hidden; }
   .hero-type-orbit-left { width: 430px; height: 430px; left: 58px; top: -360px; }
-  .hero-type-orbit-right { width: 330px; height: 330px; right: -250px; top: 18px; }
+  .hero-type-orbit-right { width: 330px; height: 330px; right: -302px; top: 18px; }
   .hero-type-orbit-guide { stroke-width: 9px; }
   .hero-type-orbit-copy { font-size: 48px; letter-spacing: 5px; }
   .title-stack { width: calc(100vw - 32px); height: 82px; margin-top: 56px; }
