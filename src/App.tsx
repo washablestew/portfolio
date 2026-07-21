@@ -1,5 +1,8 @@
-import { motion, MotionConfig, type Variants } from 'framer-motion'
+import { AnimatePresence, motion, MotionConfig, useMotionValue, useReducedMotion, useSpring, type Variants } from 'framer-motion'
+import { useCallback, useState, type FocusEvent, type PointerEvent } from 'react'
 import { Link } from 'react-router-dom'
+import { ProjectPreviewDeck, type ActivePreview } from './components/ProjectPreviewDeck'
+import { projectPreviews } from './projectPreviews'
 import { projects, type Project } from './projects'
 
 const MotionLink = motion.create(Link)
@@ -45,7 +48,14 @@ function ArrowIcon() {
   )
 }
 
-function ProjectRow({ project }: { project: Project }) {
+type ProjectRowProps = {
+  project: Project
+  onPreviewStart: (project: Project, event: PointerEvent<HTMLAnchorElement> | FocusEvent<HTMLAnchorElement>) => void
+  onPreviewMove: (project: Project, event: PointerEvent<HTMLAnchorElement>) => void
+  onPreviewEnd: () => void
+}
+
+function ProjectRow({ project, onPreviewStart, onPreviewMove, onPreviewEnd }: ProjectRowProps) {
   return (
     <MotionLink
       className="project"
@@ -56,6 +66,11 @@ function ProjectRow({ project }: { project: Project }) {
       {...revealProps}
       whileHover="hover"
       whileFocus="hover"
+      onPointerEnter={(event) => onPreviewStart(project, event)}
+      onPointerMove={(event) => onPreviewMove(project, event)}
+      onPointerLeave={onPreviewEnd}
+      onFocus={(event) => onPreviewStart(project, event)}
+      onBlur={onPreviewEnd}
     >
       <h2>{project.title}</h2>
       <span className="project-dot" aria-hidden="true" />
@@ -73,6 +88,63 @@ function ProjectRow({ project }: { project: Project }) {
 }
 
 export function HomePage() {
+  const reduceMotion = useReducedMotion()
+  const [activePreview, setActivePreview] = useState<ActivePreview | null>(null)
+  const previewX = useMotionValue(-400)
+  const previewY = useMotionValue(-400)
+  const springX = useSpring(previewX, { stiffness: 320, damping: 34, mass: 0.72 })
+  const springY = useSpring(previewY, { stiffness: 320, damping: 34, mass: 0.72 })
+
+  const positionPreview = useCallback((clientX: number, clientY: number, fallbackY = window.innerHeight / 2) => {
+    const cardWidth = window.innerWidth >= 1200 ? 260 : 220
+    const cardHeight = cardWidth * (340 / 480)
+    const offset = 30
+    const edge = 18
+    const safeX = Number.isFinite(clientX) ? clientX : window.innerWidth / 2
+    const safeY = Number.isFinite(clientY) ? clientY : fallbackY
+    const nextX = safeX + cardWidth + offset + edge > window.innerWidth
+      ? safeX - cardWidth - offset
+      : safeX + offset
+    const nextY = Math.max(edge, Math.min(safeY + 22, window.innerHeight - cardHeight - edge))
+
+    previewX.set(nextX)
+    previewY.set(nextY)
+  }, [previewX, previewY])
+
+  const canShowPreview = useCallback(() => (
+    window.matchMedia('(min-width: 901px) and (hover: hover) and (pointer: fine)').matches
+  ), [])
+
+  const startPreview = useCallback((project: Project, event: PointerEvent<HTMLAnchorElement> | FocusEvent<HTMLAnchorElement>) => {
+    if (!canShowPreview()) return
+
+    const rect = event.currentTarget.getBoundingClientRect()
+    const isPointerEvent = 'clientX' in event && typeof event.clientX === 'number'
+    const clientX = isPointerEvent ? event.clientX : rect.right - 80
+    const clientY = rect.top + rect.height / 2
+
+    positionPreview(clientX, clientY, rect.top + rect.height / 2)
+    setActivePreview({ projectId: project.id, imageIndex: 0 })
+  }, [canShowPreview, positionPreview])
+
+  const movePreview = useCallback((project: Project, event: PointerEvent<HTMLAnchorElement>) => {
+    if (!canShowPreview() || reduceMotion) return
+
+    const images = projectPreviews[project.id]
+    if (!images?.length) return
+
+    const rect = event.currentTarget.getBoundingClientRect()
+    const progress = Math.max(0, Math.min(0.999, (event.clientX - rect.left) / rect.width))
+    const imageIndex = Math.floor(progress * images.length)
+
+    positionPreview(event.clientX, rect.top + rect.height / 2)
+    setActivePreview((current) => (
+      current?.projectId === project.id && current.imageIndex === imageIndex
+        ? current
+        : { projectId: project.id, imageIndex }
+    ))
+  }, [canShowPreview, positionPreview, reduceMotion])
+
   return (
     <MotionConfig reducedMotion="user">
       <main>
@@ -88,9 +160,27 @@ export function HomePage() {
       </section>
 
       <section className="projects" aria-label="Проекты">
-        {projects.map((project) => <ProjectRow project={project} key={project.id} />)}
+        {projects.map((project) => (
+          <ProjectRow
+            project={project}
+            key={project.id}
+            onPreviewStart={startPreview}
+            onPreviewMove={movePreview}
+            onPreviewEnd={() => setActivePreview(null)}
+          />
+        ))}
         <motion.p className="upcoming" variants={revealVariants} {...revealProps}>new projects upcoming...</motion.p>
       </section>
+
+      <AnimatePresence>
+        {activePreview && (
+          <ProjectPreviewDeck
+            active={activePreview}
+            x={reduceMotion ? previewX : springX}
+            y={reduceMotion ? previewY : springY}
+          />
+        )}
+      </AnimatePresence>
 
       <motion.footer className="contact" variants={revealVariants} {...revealProps}>
         <div className="contact-heading">
