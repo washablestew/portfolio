@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import { HomePage } from './App'
+import { ProjectBackLink } from './components/ProjectBackLink'
 import { AvitoPage } from './pages/AvitoPage'
 import { ChillOutPage } from './pages/ChillOutPage'
 import { DurakPage } from './pages/DurakPage'
@@ -18,10 +19,18 @@ function ScrollToTop() {
   return null
 }
 
+function ProjectNavigation() {
+  const { pathname } = useLocation()
+  return pathname.startsWith('/projects/') ? <ProjectBackLink /> : null
+}
+
 export function PortfolioApp() {
+  const basename = import.meta.env.BASE_URL === '/' ? undefined : import.meta.env.BASE_URL.replace(/\/$/, '')
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <ScrollToTop />
+      <ProjectNavigation />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects/avito" element={<AvitoPage />} />
