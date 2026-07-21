@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, MotionConfig, useMotionValue, useReducedMotion, useSpring, type Variants } from 'framer-motion'
-import { useCallback, useState, type FocusEvent, type PointerEvent } from 'react'
+import { memo, useCallback, useState, type FocusEvent, type PointerEvent } from 'react'
 import { Link } from 'react-router-dom'
+import smileUrl from './assets/smile.svg'
 import { ProjectPreviewDeck, type ActivePreview } from './components/ProjectPreviewDeck'
 import { projectPreviews } from './projectPreviews'
 import { projects, type Project } from './projects'
@@ -55,7 +56,7 @@ type ProjectRowProps = {
   onPreviewEnd: () => void
 }
 
-function ProjectRow({ project, onPreviewStart, onPreviewMove, onPreviewEnd }: ProjectRowProps) {
+const ProjectRow = memo(function ProjectRow({ project, onPreviewStart, onPreviewMove, onPreviewEnd }: ProjectRowProps) {
   return (
     <MotionLink
       className="project"
@@ -85,7 +86,7 @@ function ProjectRow({ project, onPreviewStart, onPreviewMove, onPreviewEnd }: Pr
       <motion.span className="project-arrow" variants={arrowVariants}><ArrowIcon /></motion.span>
     </MotionLink>
   )
-}
+})
 
 export function HomePage() {
   const reduceMotion = useReducedMotion()
@@ -97,7 +98,7 @@ export function HomePage() {
 
   const positionPreview = useCallback((clientX: number, clientY: number, fallbackY = window.innerHeight / 2) => {
     const cardWidth = window.innerWidth >= 1200 ? 260 : 220
-    const cardHeight = cardWidth * (340 / 480)
+    const cardHeight = cardWidth
     const offset = 30
     const edge = 18
     const safeX = Number.isFinite(clientX) ? clientX : window.innerWidth / 2
@@ -145,6 +146,8 @@ export function HomePage() {
     ))
   }, [canShowPreview, positionPreview, reduceMotion])
 
+  const endPreview = useCallback(() => setActivePreview(null), [])
+
   return (
     <MotionConfig reducedMotion="user">
       <main>
@@ -166,7 +169,7 @@ export function HomePage() {
             key={project.id}
             onPreviewStart={startPreview}
             onPreviewMove={movePreview}
-            onPreviewEnd={() => setActivePreview(null)}
+            onPreviewEnd={endPreview}
           />
         ))}
         <motion.p className="upcoming" variants={revealVariants} {...revealProps}>new projects upcoming...</motion.p>
@@ -185,9 +188,7 @@ export function HomePage() {
       <motion.footer className="contact" variants={revealVariants} {...revealProps}>
         <div className="contact-heading">
           <h2>Давайте<br />работать вместе!</h2>
-          <svg className="scribble" viewBox="0 0 220 270" aria-hidden="true">
-            <path d="M88 8c-3 54 5 105 29 151M132 29c-9 51-8 94 5 132M13 166c64-8 123 12 186 87" />
-          </svg>
+          <img className="scribble" src={smileUrl} alt="" aria-hidden="true" />
         </div>
         <address>
           <a href="mailto:washablestew@gmail.com">e-mail: washablestew@gmail.com</a>

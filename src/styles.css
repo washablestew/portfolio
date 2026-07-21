@@ -99,7 +99,7 @@ main { min-height: 100vh; overflow: hidden; }
   top: 0;
   left: 0;
   width: 260px;
-  aspect-ratio: 24 / 17;
+  aspect-ratio: 1;
   pointer-events: none;
   transform-origin: center;
 }
@@ -142,8 +142,7 @@ main { min-height: 100vh; overflow: hidden; }
 .contact { width: min(1430px, calc(100vw - 80px)); margin: 85px auto 0; padding-bottom: 58px; }
 .contact-heading { display: flex; align-items: center; justify-content: space-between; }
 .contact h2 { margin: 0; font-family: var(--display); font-size: clamp(76px, 5.75vw, 110px); font-weight: 400; line-height: 1.02; }
-.scribble { width: 220px; height: 274px; margin-right: 110px; }
-.scribble path { fill: none; stroke: var(--ink); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+.scribble { display: block; width: 220px; height: 274px; margin-right: 110px; object-fit: contain; }
 .contact address { display: grid; gap: 4px; margin-top: 56px; font-family: var(--display); font-size: clamp(42px, 3.65vw, 70px); font-style: normal; line-height: 1.25; }
 .contact address a { width: max-content; max-width: 100%; text-decoration-thickness: 3px; text-underline-offset: 8px; text-decoration-color: transparent; }
 .contact address a:hover, .contact address a:focus-visible { text-decoration-color: currentColor; outline: none; }
@@ -184,7 +183,6 @@ main { min-height: 100vh; overflow: hidden; }
   .contact-heading { align-items: flex-start; }
   .contact h2 { font-size: 56px; line-height: 1.02; }
   .scribble { width: 94px; height: 118px; margin: 16px 8px 0 0; flex: 0 0 auto; }
-  .scribble path { stroke-width: 13; }
   .contact address { gap: 4px; margin-top: 32px; font-size: 16px; font-family: Roboto, Arial, sans-serif; }
   .footer-line { margin-top: 30px; }
 }
